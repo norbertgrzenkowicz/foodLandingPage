@@ -3,6 +3,10 @@ import { createClient } from "../../../supabase/server";
 import { InfoIcon, UserCircle } from "lucide-react";
 import { redirect } from "next/navigation";
 import { SubscriptionCheck } from "@/components/subscription-check";
+import {
+  DietaryPreferencesForm,
+  PhotoUploadSection,
+} from "./client-components";
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -25,7 +29,9 @@ export default async function Dashboard() {
             <h1 className="text-3xl font-bold">Dashboard</h1>
             <div className="bg-secondary/50 text-sm p-3 px-4 rounded-lg text-muted-foreground flex gap-2 items-center">
               <InfoIcon size="14" />
-              <span>This is a protected page only visible to authenticated users</span>
+              <span>
+                This is a protected page only visible to authenticated users
+              </span>
             </div>
           </header>
 
@@ -43,6 +49,23 @@ export default async function Dashboard() {
                 {JSON.stringify(user, null, 2)}
               </pre>
             </div>
+          </section>
+
+          {/* Dietary Preferences Form */}
+          <section className="bg-card rounded-xl p-6 border shadow-sm">
+            <h2 className="font-semibold text-xl mb-4">
+              Your Dietary Preferences
+            </h2>
+            <DietaryPreferencesForm />
+          </section>
+
+          {/* Photo Upload Section */}
+          <section className="bg-card rounded-xl p-6 border shadow-sm">
+            <h2 className="font-semibold text-xl mb-4">Scan Ingredients</h2>
+            <p className="text-muted-foreground mb-4">
+              Take a photo of ingredient lists to analyze them instantly.
+            </p>
+            <PhotoUploadSection />
           </section>
         </div>
       </main>
