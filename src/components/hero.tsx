@@ -1,7 +1,42 @@
-import Link from "next/link";
+"use client";
+
 import { ArrowUpRight, Check } from "lucide-react";
+import { useState } from "react";
 
 export default function Hero() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setMessage("Thanks for joining our waitlist!");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setStatus("error");
+      setMessage("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <div className="relative overflow-hidden bg-white">
       {/* Background gradient */}
@@ -24,21 +59,31 @@ export default function Hero() {
               our powerful ingredient scanner.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center px-8 py-4 text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors text-lg font-medium"
-              >
-                Start Scanning Free
-                <ArrowUpRight className="ml-2 w-5 h-5" />
-              </Link>
-
-              <Link
-                href="#pricing"
-                className="inline-flex items-center px-8 py-4 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors text-lg font-medium"
-              >
-                View Pricing
-              </Link>
+            <div className="max-w-md mx-auto">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <div className="flex gap-2">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                  >
+                    {status === "loading" ? "Joining..." : "Join Waitlist"}
+                  </button>
+                </div>
+                {message && (
+                  <p className={`text-sm ${status === "success" ? "text-green-600" : "text-red-600"}`}>
+                    {message}
+                  </p>
+                )}
+              </form>
             </div>
 
             <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-gray-600">
