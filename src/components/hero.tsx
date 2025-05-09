@@ -46,17 +46,23 @@ export default function Hero() {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-8 tracking-tight">
-              Know{" "}
+              Ever looked at the {" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
-                What's Inside
+                food label
               </span>{" "}
-              Your Food
+              and
             </h1>
 
             <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-              Scan food products to instantly analyze ingredients and identify
-              potentially harmful additives. Take control of your health with
-              our powerful ingredient scanner.
+              wondered what the hell is Monosodium Glutamate? And didn't bother to look it up? Just devoured{" "}
+              <span className="text-transparent font-bold bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
+                whole box
+              </span> again? I'm building an app to analyze ingredients and identify
+              potentially harmful additives{" "}
+              <span className="text-transparent font-bold bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
+                instantly.
+              </span>
+              {" "}Sounds like you problem? Join the waitlist. 
             </p>
 
             <div className="max-w-md mx-auto">
@@ -89,18 +95,17 @@ export default function Hero() {
             <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-gray-600">
               <div className="flex items-center gap-2">
                 <Check className="w-5 h-5 text-green-500" />
-                <span>Personalized allergen alerts</span>
+                <span>Health rating system</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-5 h-5 text-green-500" />
+                <span>Personalized analysis based on your preferences</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="w-5 h-5 text-green-500" />
                 <span>Barcode & photo scanning</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Check className="w-5 h-5 text-green-500" />
-                <span>Health rating system</span>
-              </div>
-            </div>
-          </div>
+            </div>          </div>
         </div>
       </div>
     </div>
