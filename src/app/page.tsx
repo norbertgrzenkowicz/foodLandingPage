@@ -89,8 +89,8 @@ export default async function Home() {
       <section className="py-12 bg-white border-t border-gray-100 mt-12">
         <div className="container mx-auto px-4 text-center flex flex-col items-center">
           <h2 className="text-2xl font-semibold mb-2">About Me</h2>
-          <p className="text-gray-700 max-w-xl mb-2">I'm Norbert Grzenkowicz, the developer of this app. I'm a software engineer and I care about my health. Hope this one will makes </p>
-          <p className="text-gray-700 max-w-xl mb-6">Here are my socials:</p>
+          <p className="text-gray-700 max-w-xl mb-2">I'm Norbert Grzenkowicz, the developer of this app. I'm a so-called software engineer and I care about my health. Crazy. I know. </p>
+          <p className="text-gray-700 max-w-xl mb-6">Socials:</p>
           <div className="flex gap-6 justify-center">
             <a href="https://www.linkedin.com/in/norbertgrzenkowicz" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-700 hover:text-blue-900 font-medium transition">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8a6 6 0 016 6v5a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4a2 2 0 00-4 0v4a1 1 0 01-1 1H7a1 1 0 01-1-1v-5a6 6 0 016-6z" /><circle cx="4" cy="4" r="2" /><rect x="2" y="8" width="4" height="12" rx="1" /></svg>
