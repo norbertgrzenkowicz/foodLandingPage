@@ -11,11 +11,11 @@ export default async function Navbar() {
 
 
   return (
-    <nav className="w-full border-b border-gray-200 bg-white py-2">
+    <nav className="hidden w-full border-b border-gray-200 bg-white py-2">
   <div className="container mx-auto px-4 flex items-center justify-between relative">
     <div className="flex-1 flex justify-center absolute left-0 right-0 pointer-events-none">
       <Link href="/" prefetch className="text-xl font-bold pointer-events-auto">
-        Logo
+        FoodAI
       </Link>
     </div>
     <div className="flex gap-4 items-center ml-auto relative z-10">

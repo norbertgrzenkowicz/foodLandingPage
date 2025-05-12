@@ -18,43 +18,67 @@ export const updateSession = async (request: NextRequest) => {
     // Create an unmodified response
     let response = NextResponse.next();
 
+    // Ensure environment variables are available
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      console.error('Missing Supabase environment variables');
+      return response;
+    }
+
     const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      supabaseUrl,
+      supabaseAnonKey,
       {
         cookies: {
           get(name: string) {
             return request.cookies.get(name)?.value;
           },
           set(name: string, value: string, options?: CookieOptions) {
-            response.cookies.set({
-              name,
-              value,
-              ...options,
-            });
+            try {
+              response.cookies.set({
+                name,
+                value,
+                ...options,
+              });
+            } catch (error) {
+              console.error(`Error setting cookie ${name}:`, error);
+            }
           },
           remove(name: string, options?: CookieOptions) {
-            response.cookies.set({
-              name,
-              value: "",
-              ...options,
-              maxAge: 0,
-            });
+            try {
+              response.cookies.set({
+                name,
+                value: "",
+                ...options,
+                maxAge: 0,
+              });
+            } catch (error) {
+              console.error(`Error removing cookie ${name}:`, error);
+            }
           },
         },
       }
     );
 
-    // This will refresh session if expired - required for Server Components
-    // https://supabase.com/docs/guides/auth/server-side/nextjs
-    await supabase.auth.getSession();
+    try {
+      // This will refresh session if expired - required for Server Components
+      // https://supabase.com/docs/guides/auth/server-side/nextjs
+      await supabase.auth.getSession();
 
-    // protected routes
-    if (request.nextUrl.pathname.startsWith("/dashboard")) {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        return NextResponse.redirect(new URL("/sign-in", request.url));
+      // protected routes
+      if (request.nextUrl.pathname.startsWith("/dashboard")) {
+        const { data } = await supabase.auth.getSession();
+        const session = data?.session;
+        
+        if (!session) {
+          return NextResponse.redirect(new URL("/sign-in", request.url));
+        }
       }
+    } catch (sessionError) {
+      console.error("Session handling error:", sessionError);
+      // Don't block the request if session handling fails
     }
 
     return response;

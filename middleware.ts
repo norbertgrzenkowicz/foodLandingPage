@@ -1,21 +1,30 @@
-import React from "react";
 import { updateSession } from "./supabase/middleware";
-import { type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request);
+  try {
+    return await updateSession(request);
+  } catch (error) {
+    console.error('Middleware error:', error);
+    // Return a next response to prevent the middleware from failing
+    return NextResponse.next();
+  }
 }
 
 export const config = {
   matcher: [
     /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - images - .svg, .png, .jpg, .jpeg, .gif, .webp
-     * Feel free to modify this pattern to include more paths.
+     * Only match specific routes that need auth or session handling:
+     * - Dashboard routes
+     * - API routes
+     * - Auth routes
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    '/dashboard/:path*',
+    '/api/:path*',
+    '/auth/:path*',
+    '/sign-in',
+    '/sign-up',
+    '/forgot-password',
+    '/success'
   ],
 };

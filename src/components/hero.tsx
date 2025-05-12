@@ -50,11 +50,11 @@ export default function Hero() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
                 food label
               </span>{" "}
-              and
+              <span className="inline-block">and wondered</span>
             </h1>
 
             <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-              wondered what the hell is Monosodium Glutamate? And didn't bother to look it up? Just devoured{" "}
+              what the hell is Monosodium Glutamate? And didn't bother to look it up? Just devoured{" "}
               <span className="text-transparent font-bold bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
                 whole box
               </span> again? I'm building an app to analyze ingredients and identify
@@ -62,7 +62,7 @@ export default function Hero() {
               <span className="text-transparent font-bold bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
                 instantly.
               </span>
-              {" "}Sounds like you problem? Join the waitlist. 
+              {" "}Sounds like your problem? Join the waitlist.
             </p>
 
             <div className="max-w-md mx-auto">
