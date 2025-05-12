@@ -60,9 +60,9 @@ export default function Hero() {
               </span> again? I'm building an app to analyze ingredients and identify
               potentially harmful additives{" "}
               <span className="text-transparent font-bold bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
-                instantly.
+                instantly
               </span>
-              {" "}Sounds like your problem? Join the waitlist.
+              {" "}Sounds like your problem? Join the waitlist. <br /> Oh, such app already exists? <br /> My will have funny little features...
             </p>
 
             <div className="max-w-md mx-auto">
